@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM & Event Labs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .formgroup {
+            margin-bottom: 15px;
+        }
+        .card{ border: 1px solid #ccc; padding: 15px; border-radius: 8px; margin-top: 10px; }
+        .highlight { background-color: #fff3cd; border-color: #ffeeba; }
+        .text-danger { color: red; }
+    </style>
+</head>
+<body> 
+    <h2>แบบฟอร์มลงทะเบียน (Registration Form)</h2>
+    <form id="regForm">
+        <div class="form-group">
+            <label for="name">ชื่อ-นามสกุล (Name-Surname):</label>
+            <input type="text" id="fullname" class="input-field" placeholder="กรอกชื่อ-นามสกุล" required>
+            <span id="nameError" class="text-danger"></span>
+        </div>
+
+        <script>
+            const regForm = document.getElementById("regForm");
+
+            regForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const fullname = document.getElementById("fullname").value.trim();
+                const department = document.getElementById("department").value;
+
+                const levelElement =
+                    document.querySelector('input[name="level"]:checked');
+
+                const skills = Array.from(
+                    document.querySelectorAll('input[name="skills"]:checked')
+                ).map(skill => skill.value);
+                const avatarUrl = document.getElementById("avatarUrl").value.trim();
+                const Userdata = {
+                    fullname: fullname,
+                    department: department,
+                    level: levelElement ? levelElement.value : "",
+                    skills: skills,
+                    avatarUrl: avatarUrl
+                };
+                console.log(Userdata);
+            });
+        </script>
+
+        <div class="form-group">
+            <label>แผนกงาน (Department):</label><br>
+            <select id="department" class="input-field" required    >
+                <option value="">-- เลือกแผนกงาน --</option>
+                <option value="IT">IT</option>
+                <option value="MKT">MKT</option>
+                <option value="HR">HR</option>
+                <option value="Finance">Finance</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>ระดับการทำงาน (Work level):</label><br>
+            <input type="radio" name="level" value="junior" class="user-level"> Junior
+            <input type="radio" name="level" value="senior" class="senior-level"> Senior
+        </div>
+
+        <div class="form-group">
+            <label>ทักษะความสามาารถ (Skills):</label>
+            <input type="checkbox" name="skills" value="HTML/CSS" class="skill"> HTML/CSS
+            <input type="checkbox" name="skills" value="JavaScript" class="skill"> JavaScript
+            <input type="checkbox" name="skills" value="Database" class="skill"> Database
+
+        </div>
+
+        <div class="form-group">
+            <label>โปรไฟล์ (Profile URL):</label>
+            <input type="url" id="avatarUrl" class="input-field" placeholder="กรอก URL โปรไฟล์" required>
+        </div>
+        <button type="button" id="previewBtnByID">แสดงตัวอย่าง byID</button>
+        <button type="button" id="previewBtnByClass">แสดงตัวอย่าง byClass</button>
+        <button type="button" id="previewBtnByQuerySelector">แสดงตัวอย่าง byQuerySelector</button>
+        <button type="button" id="previewBtnByQuerySelectorAll">แสดงตัวอย่าง byQuerySelectorAll</button>
+        <button type="button" id="reset">รีเซ็ต</button>
+        <button type="submit" id="submitBtn">ส่งข้อมูล</button>
+    </form>
+
+    <hr>
+    <h3>textContent / innerText / innerHTML</h3>
+    <p id="testTextContent"></p>
+    <p id="testInnerText"></p>
+    <p id="testInnerHTML"></p>
+    
+        <script>
+            const testTextContent = document.getElementById("testTextContent");
+            const testInnerText = document.getElementById("testInnerText");
+            const testInnerHTML = document.getElementById("testInnerHTML");
+
+            testTextContent.textContent = "<strong>textContent</strong> แสดงผลเป็นข้อความธรรมดา";
+            testInnerText.innerText = "<strong>innerText</strong> แสดงผลเป็นข้อความธรรมดา";
+            testInnerHTML.innerHTML = "<strong>innerHTML</strong> แสดงผลเป็น HTML";
+        </script>
+
+    <hr>
+
+    <h3>พื้นที่แสดงผล (Preview Area)</h3>
+    <div id="previewArea" class="card">
+        <img id="avatarImg" 
+        src="http://via.placeholder.com/100" 
+        alt="Profile" 
+        style="width: 100px; height: auto;">
+
+        <h4 id="disName"></h4>
+        <p id="disDpt"></p>
+        <p id="disDetails"></p>
+        <div id="jsonResult"></div>
+    </div>
+
+    <script>
+        const avatarUrl = document.getElementById("avatarUrl");
+        const avatarImg = document.getElementById("avatarImg");
+
+        // อ่านค่า src เดิมด้วย getAttribute()
+        const originalSrc = avatarImg.getAttribute("src");
+
+        avatarUrl.addEventListener("input", function () {
+            const newUrl = avatarUrl.value.trim();
+
+            console.log("ค่า src เดิม:", originalSrc);
+
+            if (newUrl !== "") {
+                // เปลี่ยน src ด้วย setAttribute()
+                avatarImg.setAttribute("src", newUrl);
+            } else {
+                // ถ้าลบ URL ให้กลับรูปเดิม
+                avatarImg.setAttribute("src", originalSrc);
+            }
+    });
+    </script>
+
+    <script>
+
+                    const fullnameInput = document.getElementById("fullname");
+            const departmentSelect = document.getElementById("department");
+            fullnameInput.addEventListener("input", function () {
+                document.getElementById("disName").textContent =
+                fullnameInput.value || "ยังไม่ได้กรอกชื่อ";
+            });
+
+            departmentSelect.addEventListener("change", function () {
+            document.getElementById("disDpt").textContent =
+                departmentSelect.value || "ยังไม่ได้เลือกแผนก";
+            });
+
+        
+    // 1. getElementById
+    document.getElementById("previewBtnByID").addEventListener("click", () => {
+        const fullname = document.getElementById("fullname").value.trim();
+        const department = document.getElementById("department").value;
+
+        const level =
+            document.querySelector('input[name="level"]:checked');
+
+        const skills = Array.from(
+            document.querySelectorAll('input[name="skills"]:checked')
+        ).map(skill => skill.value);
+
+        document.getElementById("disName").textContent =
+            fullname || "ไม่ได้กรอกชื่อ";
+
+        document.getElementById("disDpt").textContent =
+            department || "ไม่ได้เลือกแผนกงาน";
+
+        document.getElementById("disDetails").textContent =
+            level
+                ? `ระดับการทำงาน: ${level.value}`
+                : "ไม่ได้เลือกระดับการทำงาน";
+
+        document.getElementById("jsonResult").textContent =
+            skills.length
+                ? `ทักษะ: ${skills.join(", ")}`
+                : "ไม่ได้เลือกทักษะ";
+    });
+
+
+    // 2. getElementsByClassName
+    const collection =
+        document.getElementsByClassName("input-field");
+
+    document.getElementById("previewBtnByClass")
+        .addEventListener("click", () => {
+
+            const fullname = collection[0].value.trim();
+            const department = collection[1].value;
+
+            const level =
+                document.querySelector('input[name="level"]:checked');
+
+            const skills = Array.from(
+                document.querySelectorAll('input[name="skills"]:checked')
+            ).map(skill => skill.value);
+
+            document.getElementById("disName").textContent =
+                fullname || "ไม่ได้กรอกชื่อ";
+
+            document.getElementById("disDpt").textContent =
+                department || "ไม่ได้เลือกแผนกงาน";
+
+            document.getElementById("disDetails").textContent =
+                level
+                    ? `ระดับการทำงาน: ${level.value}`
+                    : "ไม่ได้เลือกระดับการทำงาน";
+
+            document.getElementById("jsonResult").textContent =
+                skills.length
+                    ? `ทักษะ: ${skills.join(", ")}`
+                    : "ไม่ได้เลือกทักษะ";
+        });
+
+
+    // 3. querySelector
+    document.querySelector("#previewBtnByQuerySelector")
+        .addEventListener("click", () => {
+
+            const fullname =
+                document.querySelector("#fullname").value.trim();
+
+            const department =
+                document.querySelector("#department").value;
+
+            const level =
+                document.querySelector('input[name="level"]:checked');
+
+            const skills = Array.from(
+                document.querySelectorAll('input[name="skills"]:checked')
+            ).map(skill => skill.value);
+
+            document.querySelector("#disName").textContent =
+                fullname || "ไม่ได้กรอกชื่อ";
+
+            document.querySelector("#disDpt").textContent =
+                department || "ไม่ได้เลือกแผนกงาน";
+
+            document.querySelector("#disDetails").textContent =
+                level
+                    ? `ระดับการทำงาน: ${level.value}`
+                    : "ไม่ได้เลือกระดับการทำงาน";
+
+            document.querySelector("#jsonResult").textContent =
+                skills.length
+                    ? `ทักษะ: ${skills.join(", ")}`
+                    : "ไม่ได้เลือกทักษะ";
+        });
+
+
+    // 4. querySelectorAll
+    document.getElementById("previewBtnByQuerySelectorAll")
+        .addEventListener("click", () => {
+
+            const elements =
+                document.querySelectorAll(".input-field");
+
+            const skillElements =
+                document.querySelectorAll(".skill");
+
+            const fullname =
+                elements[0].value.trim();
+
+            const department =
+                elements[1].value;
+
+            const level =
+                document.querySelector('input[name="level"]:checked');
+
+            const skills = [];
+
+            for (let i = 0; i < skillElements.length; i++) {
+                if (skillElements[i].checked) {
+                    skills.push(skillElements[i].value);
+                }
+            }
+
+            document.getElementById("disName").textContent =
+                fullname || "ไม่ได้กรอกชื่อ";
+
+            document.getElementById("disDpt").textContent =
+                department || "ไม่ได้เลือกแผนกงาน";
+
+            document.getElementById("disDetails").textContent =
+                level
+                    ? `ระดับการทำงาน: ${level.value}`
+                    : "ไม่ได้เลือกระดับการทำงาน";
+
+            document.getElementById("jsonResult").textContent =
+                skills.length
+                    ? `ทักษะ: ${skills.join(", ")}`
+                    : "ไม่ได้เลือกทักษะ";
+        });
+
+</script>
+
+<script>
+    // 1 onclick
+    document.getElementById("previewBtnByID").addEventListener("click", () => {
+        alert("กำลังประมวลผล...");
+    });
+
+
+    // 2 onchange
+    document.getElementById("department").addEventListener("change", (event) => {
+        console.log("แผนกที่เลือก:", event.target.value);
+    });
+
+
+    // 3 onkeyup
+    document.getElementById("fullname").addEventListener("keyup", () => {
+        const fullname = document.getElementById("fullname").value.trim();
+        const nameError = document.getElementById("nameError");
+
+        if (fullname.length < 3) {
+            nameError.textContent = "ชื่อต้องยาวอย่างน้อย 3 ตัวอักษร";
+        } else {
+            nameError.textContent = "";
+        }
+    });
+
+
+    // 4 mouseover
+    const previewArea = document.getElementById("previewArea");
+
+    previewArea.addEventListener("mouseover", () => {
+        previewArea.style.backgroundColor = "lightblue";
+    });
+
+
+    // 5 mouseout
+    previewArea.addEventListener("mouseout", () => {
+        previewArea.style.backgroundColor = "";
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
