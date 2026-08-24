@@ -1,0 +1,282 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    padding: 30px;
+    color: #222;
+}
+
+
+/* COMMON BOX STYLE*/
+
+.Header,
+.label,
+.information,
+.adminbox {
+    width: 90%;
+    max-width: 700px;
+
+    margin: 20px auto;
+    padding: 25px;
+
+    background-color: white;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* HEADER*/
+
+.Header {
+    text-align: center;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.Header h1 {
+    margin-bottom: 10px;
+}
+
+
+/* TITLES */
+
+h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+
+/*LABEL*/
+
+label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+
+    font-weight: bold;
+}
+
+
+/* INPUT */
+
+input,
+select {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+
+/* Focus effect */
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+
+/* BUTTONS */
+
+button {
+    padding: 10px 18px;
+
+    margin-top: 10px;
+    margin-right: 5px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #3498db;
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+/* Mouse over button */
+
+button:hover {
+    background-color: #2980b9;
+}
+
+
+/* Button clicked */
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+/* INFORMATION*/
+
+.information ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+/* Event cards */
+
+.eventcard {
+    padding: 20px;
+
+    margin-bottom: 15px;
+
+    background-color: #fafafa;
+
+    border-left: 5px solid #3498db;
+
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+.eventcard h3 {
+    color: #2c3e50;
+}
+
+
+.eventcard p {
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+
+/* DETAILS*/
+
+.information details {
+    width: 100%;
+
+    padding: 15px;
+    margin: 10px 0;
+
+    background-color: #fafafa;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.information summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/*ADMIN*/
+
+.adminlogin {
+    width: 100%;
+
+    padding: 20px;
+
+    margin-bottom: 30px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+/*MOBILE*/
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .Header,
+    .label,
+    .information,
+    .adminbox {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+/* THEME TOGGLE */
+body {
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+body.dark-theme {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+body.dark-theme .Header,
+body.dark-theme .label,
+body.dark-theme .information,
+body.dark-theme .adminbox {
+    background-color: #2c2c2c;
+    color: white;
+}
+
+body.dark-theme input,
+body.dark-theme select {
+    background-color: #3a3a3a;
+    color: white;
+    border-color: #666;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme p,
+body.dark-theme label,
+body.dark-theme summary {
+    color: #f1f1f1;
+}
+
+body.dark-theme .eventcard {
+    background-color: #333;
+    color: white;
+    border-left-color: #3498db;
+}
+
+
+
+body.dark-theme .information details {
+    background-color: #333;
+    border-color: #555;
+}
+
+
+
+body.dark-theme .adminlogin {
+    background-color: #333;
+    border-color: #555;
+}

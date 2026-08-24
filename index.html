@@ -5,8 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
 </head>
 <body>
+<form id="themeForm">
+    <div class="themebutton">
+        <button type="button" id="themeToggle">Change Colour mode</button>
+    </div>
+</form>
+
+
+<div class="Header"> 
+    <h1>Event & Workshop Registration</h1>
+    <p>Welcome to our registration page!</p>
+    <img src="source/img/Landing.jpg" alt="Header Image" width="100%">
+</div>
+
+<form id="searchForm">
+    <div class="label">
+
+        <h2>Search for Events</h2>
+
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+
+        <br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="all">All</option>
+            <option value="workshop">Workshop</option>
+            <option value="seminar">Seminar</option>
+            <option value="conference">Conference</option>
+        </select>
+
+        <br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date">
+
+        <br>
+
+        <button type="reset">Reset</button>
+        <button type="submit">Search</button>
+
+    </div>
+</form>
+
+
+<div class="information">
+    <h2>Event Information</h2>
+    <p>Here you can find information about upcoming events and workshops.</p>
+    <label for="sort">Sort By:</label>
+        <select id="sort">
+            <option value="none">None</option>
+            <option value="date">Date</option>
+            <option value="seats">Seats</option>
+        </select>
+        <select id="category">
+            <option value="all">All</option>
+            <option value="Tech">Tech</option>
+            <option value="Design">Design</option>
+            <option value="Business">Business</option>
+            <option value="General">General</option>
+        </select>
+    <ul>
+        <div class="information details">
+            <br>
+            <div id="eventList"></div>
+            <br>
+        </div>
+    </ul>
+</div>
+
+<div class="adminbox">
+
+    <div class="adminlogin">
+        <h2>Admin Login</h2>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username">
+
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password">
+
+        <br>
+
+        <button type="button">Login</button>
+    </div>
+
+    <hr>
+
+    <h2>Admin Panel</h2>
+
+    <form id="eventForm">
+
+        <label for="title">Event Name:</label>
+        <input type="text" id="title" required>
+
+        <br>
+
+        <label for="category">Event Type:</label>
+        <select id="category" required  >
+            <option value="Tech">Tech</option>
+            <option value="Design">Design</option>
+            <option value="Business">Business</option>
+        </select>
+
+        <br>
+
+        <label for="description">Event Details:</label>
+        <input type="text" id="description">
+
+        <br>
+
+        <label for="date">Event Date:</label>
+        <input type="date" id="date">
+
+        <br>
+
+        <label for="eventtime">Event Time:</label>
+        <input type="time" id="eventtime">
+
+        <br>
+
+        <label for="speaker">Event Organizer:</label>
+        <input type="text" id="speaker">
+
+        <br>
+
+        <label for="seats">Event Capacity:</label>
+        <input type="number" id="seats">
+
+        <br>
+
+        <button type="submit">Add New Event</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>
