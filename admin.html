@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Event Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/admin.js" defer></script>
+</head>
+
+
+<body>
+
+<header class="siteHeader adminHeader">
+
+    <div class="headerContent">
+
+        <div class="headerText">
+
+            <p class="headerTag">ADMINISTRATION</p>
+
+            <h1>Event Management Dashboard</h1>
+
+            <p class="headerDescription">
+                Manage events, capacity and event statistics.
+            </p>
+
+        </div>
+
+        <div class="headerAction">
+
+            <button
+                type="button"
+                onclick="window.location.href='index.html'"
+            >
+                Back to Home
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<div class="adminpage">
+
+
+    <h2>Add Event</h2>
+
+
+    <form id="eventForm">
+
+
+        <label for="title">
+            Event Name:
+        </label>
+
+        <input
+            type="text"
+            id="title"
+            required
+        >
+
+
+        <label for="eventCategory">
+            Event Type:
+        </label>
+
+        <select id="eventCategory" required>
+
+            <option value="Tech">
+                Tech
+            </option>
+
+            <option value="Design">
+                Design
+            </option>
+
+            <option value="Business">
+                Business
+            </option>
+
+            <option value="General">
+                General
+            </option>
+
+        </select>
+
+
+        <label for="description">
+            Event Details:
+        </label>
+
+        <input
+            type="text"
+            id="description"
+        >
+
+
+        <label for="eventDate">
+            Event Date:
+        </label>
+
+        <input
+            type="date"
+            id="eventDate"
+            required
+        >
+
+
+        <label for="eventtime">
+            Event Time:
+        </label>
+
+        <input
+            type="time"
+            id="eventtime"
+        >
+
+
+        <label for="speaker">
+            Event Organizer:
+        </label>
+
+        <input
+            type="text"
+            id="speaker"
+            required
+        >
+
+
+        <label for="seats">
+            Event Capacity:
+        </label>
+
+        <input
+            type="number"
+            id="seats"
+            min="1"
+            required
+        >
+
+
+        <button type="submit">
+            Add New Event
+        </button>
+
+    </form>
+
+
+    <hr>
+
+
+
+  <h2>Statistics</h2>
+
+<div id="statistics">
+
+    <div class="statcard">
+        <h3>Total Events</h3>
+        <span id="totalEvents">0</span>
+    </div>
+
+    <div class="statcard">
+        <h3>Available Events</h3>
+        <span id="availableEvents">0</span>
+    </div>
+
+    <div class="statcard">
+        <h3>Full Events</h3>
+        <span id="fullEvents">0</span>
+    </div>
+
+    <div class="statcard">
+        <h3>Seats Remaining</h3>
+        <span id="totalSeats">0</span>
+    </div>
+
+    <div class="statcard">
+        <h3>Registered</h3>
+        <span id="registeredEvents">0</span>
+    </div>
+
+    <div class="statcard">
+        <h3>Next Event</h3>
+        <span id="nextEvent">-</span>
+    </div>
+
+</div>
+
+
+<h2>Category Summary</h2>
+
+<div class="categoryStats">
+
+    <div class="categoryRow">
+        <span>Tech</span>
+        <div class="statbar">
+            <div id="techBar" class="statbarFill"></div>
+        </div>
+        <strong id="techEvents">0</strong>
+    </div>
+
+
+    <div class="categoryRow">
+        <span>Design</span>
+        <div class="statbar">
+            <div id="designBar" class="statbarFill"></div>
+        </div>
+        <strong id="designEvents">0</strong>
+    </div>
+
+
+    <div class="categoryRow">
+        <span>Business</span>
+        <div class="statbar">
+            <div id="businessBar" class="statbarFill"></div>
+        </div>
+        <strong id="businessEvents">0</strong>
+    </div>
+
+
+    <div class="categoryRow">
+        <span>General</span>
+        <div class="statbar">
+            <div id="generalBar" class="statbarFill"></div>
+        </div>
+        <strong id="generalEvents">0</strong>
+    </div>
+
+    <br>
+
+    <h2>Event Seat Details</h2>
+
+<div class="eventSeatDetails">
+
+    <table id="eventSeatTable">
+
+        <thead>
+
+            <tr>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Seats Remaining</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="eventSeatBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+
+</html>

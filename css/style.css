@@ -1,29 +1,289 @@
-/* Reset */
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   BODY
+========================================================= */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+
     background-color: #f4f6f8;
-    padding: 30px;
     color: #222;
+
+    padding: 30px;
+
+    transition: 0.3s;
 }
 
 
-/* COMMON BOX STYLE*/
+/* =========================================================
+   GLOBAL TITLE
+========================================================= */
 
-.Header,
-.label,
-.information,
-.adminbox {
+h1,
+h2,
+h3 {
+    line-height: 1.3;
+}
+
+
+h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+
+h3 {
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   TOP BUTTON BAR
+========================================================= */
+
+#themeForm {
     width: 90%;
-    max-width: 700px;
+    max-width: 1100px;
+
+    margin: 0 auto 20px auto;
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.themebutton,
+.register,
+.adminButton {
+    display: inline-block;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button {
+    padding: 11px 18px;
+
+    margin: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #3498db;
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+button:hover {
+    background-color: #2980b9;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+button:disabled {
+    background-color: #aaa;
+
+    color: white;
+
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* Admin Button */
+
+.adminButton button {
+    background-color: #2c3e50;
+}
+
+
+.adminButton button:hover {
+    background-color: #1f2d3a;
+}
+
+
+/* =========================================================
+   SITE HEADER
+========================================================= */
+
+.siteHeader {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 20px auto 30px auto;
+
+    background-color: #2c3e50;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Header Layout */
+
+.headerContent {
+    display: grid;
+
+    grid-template-columns: 1.1fr 1fr;
+
+    align-items: stretch;
+
+    min-height: 340px;
+}
+
+
+/* Header Text */
+
+.headerText {
+    padding: 45px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+.headerTag {
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #5dade2;
+}
+
+
+.headerText h1 {
+    margin-bottom: 18px;
+
+    font-size: 38px;
+
+    line-height: 1.15;
+
+    color: white;
+}
+
+
+.headerDescription {
+    max-width: 500px;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #d5d8dc;
+}
+
+
+/* =========================================================
+   HEADER IMAGE
+========================================================= */
+
+.headerImage {
+    width: 100%;
+    height: 100%;
+
+    min-height: 340px;
+}
+
+
+.headerImage img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   ADMIN HEADER
+========================================================= */
+
+.adminHeader .headerContent {
+    grid-template-columns: 1fr auto;
+
+    min-height: auto;
+}
+
+
+.adminHeader .headerText {
+    padding: 35px 40px;
+}
+
+
+.adminHeader .headerText h1 {
+    font-size: 32px;
+}
+
+
+.headerAction {
+    padding: 30px 40px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.headerAction button {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SEARCH + INFORMATION BOX
+   SAME WIDTH AS HEADER
+========================================================= */
+
+.label,
+.information {
+    width: 90%;
+    max-width: 1100px;
 
     margin: 20px auto;
-    padding: 25px;
+    padding: 30px;
 
     background-color: white;
 
@@ -31,168 +291,416 @@ body {
     border-radius: 12px;
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    transition: 0.3s;
 }
 
 
-/* HEADER*/
-
-.Header {
-    text-align: center;
-    background-color: #2c3e50;
-    color: white;
-}
-
-.Header h1 {
-    margin-bottom: 10px;
-}
-
-
-/* TITLES */
-
-h2 {
-    margin-bottom: 20px;
-    color: #2c3e50;
-}
-
-h3 {
-    margin-bottom: 10px;
-}
-
-
-/*LABEL*/
+/* =========================================================
+   LABEL
+========================================================= */
 
 label {
     display: block;
+
     margin-top: 12px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 
     font-weight: bold;
 }
 
 
-/* INPUT */
+/* =========================================================
+   INPUT + SELECT
+========================================================= */
 
 input,
 select {
     width: 100%;
 
-    padding: 10px;
+    min-height: 46px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 12px;
 
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 7px;
 
+    background-color: white;
+    color: #222;
+
+    font-family: inherit;
     font-size: 14px;
 
-    margin-bottom: 10px;
+    transition: 0.2s;
 }
 
-
-/* Focus effect */
 
 input:focus,
 select:focus {
     outline: none;
+
     border-color: #3498db;
 
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
 }
 
 
-/* BUTTONS */
+/* =========================================================
+   SEARCH FORM
+========================================================= */
 
-button {
-    padding: 10px 18px;
-
-    margin-top: 10px;
-    margin-right: 5px;
-
-    border: none;
-    border-radius: 6px;
-
-    background-color: #3498db;
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 14px;
-}
-
-
-/* Mouse over button */
-
-button:hover {
-    background-color: #2980b9;
-}
-
-
-/* Button clicked */
-
-button:active {
-    transform: scale(0.97);
-}
-
-
-/* INFORMATION*/
-
-.information ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-
-/* Event cards */
-
-.eventcard {
-    padding: 20px;
-
-    margin-bottom: 15px;
-
-    background-color: #fafafa;
-
-    border-left: 5px solid #3498db;
-
-    border-radius: 8px;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-
-.eventcard h3 {
-    color: #2c3e50;
-}
-
-
-.eventcard p {
-    margin-top: 5px;
-    line-height: 1.5;
-}
-
-
-/* DETAILS*/
-
-.information details {
+#searchForm {
     width: 100%;
+}
 
+
+/* Search Buttons */
+
+.label button {
+    margin-top: 10px;
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   EVENT INFORMATION
+========================================================= */
+
+.information > p {
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   INNER INFORMATION BOX
+========================================================= */
+
+.information.details {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 15px 0 0 0;
     padding: 15px;
-    margin: 10px 0;
 
     background-color: #fafafa;
 
     border: 1px solid #ddd;
     border-radius: 8px;
-}
 
-.information summary {
-    cursor: pointer;
-    font-weight: bold;
+    box-shadow: none;
 }
 
 
-/*ADMIN*/
+/* =========================================================
+   EVENT LIST
+========================================================= */
 
-.adminlogin {
+#eventList {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   EVENT CARD
+========================================================= */
+
+.eventcard {
+    min-width: 0;
+
+    padding: 20px;
+
+    background-color: #fafafa;
+
+    border-left: 5px solid #3498db;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    line-height: 1.6;
+
+    transition: 0.2s;
+}
+
+
+.eventcard:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+.eventcard h3 {
+    margin-bottom: 10px;
+
+    color: #2c3e50;
+}
+
+
+.eventcard button {
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   LOGIN MODAL
+========================================================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    background-color: rgba(0, 0, 0, 0.65);
+
+    z-index: 1000;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal.show {
+    display: flex;
+}
+
+
+/* =========================================================
+   LOGIN POPUP
+========================================================= */
+
+.loginpopup {
+    position: relative;
+
+    width: 90%;
+    max-width: 400px;
+
+    padding: 30px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+.loginpopup h2 {
+    padding-right: 45px;
+}
+
+
+/* Login button */
+
+.loginpopup #adminLoginButton {
     width: 100%;
 
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.closebutton {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background-color: #e74c3c;
+
+    color: white;
+
+    font-size: 22px;
+    line-height: 40px;
+
+    text-align: center;
+}
+
+
+.closebutton:hover {
+    background-color: #c0392b;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   ADMIN PAGE
+========================================================= */
+
+.adminpage {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 30px auto;
+    padding: 30px;
+
+    background-color: white;
+
+    border: 1px solid #ddd;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+
+.adminpage h1 {
+    margin-bottom: 10px;
+
+    color: #2c3e50;
+}
+
+
+.adminpage > p {
+    margin-bottom: 20px;
+
+    color: #555;
+}
+
+
+.adminpage hr {
+    margin: 30px 0;
+
+    border: none;
+
+    border-top: 1px solid #ddd;
+}
+
+
+/* =========================================================
+   ADMIN EVENT FORM
+========================================================= */
+
+#eventForm {
+    width: 100%;
+
+    padding: 25px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+
+#eventForm button {
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   FORM VALIDATION MESSAGE
+========================================================= */
+
+#formMessage {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    color: #e74c3c;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+#statistics {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.statcard {
+    padding: 20px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    transition: 0.2s;
+}
+
+
+.statcard:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+.statcard h3 {
+    margin-bottom: 10px;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+
+.statcard span {
+    display: block;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    color: #3498db;
+}
+
+
+#nextEvent {
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY STATISTICS
+========================================================= */
+
+.categoryStats {
     padding: 20px;
 
     margin-bottom: 30px;
@@ -200,83 +708,594 @@ button:active {
     background-color: #f8f9fa;
 
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 
-/*MOBILE*/
+.categoryRow {
+    display: grid;
 
-@media screen and (max-width: 768px) {
+    grid-template-columns: 90px 1fr 40px;
 
-    body {
-        padding: 10px;
-    }
+    align-items: center;
 
-    .Header,
-    .label,
-    .information,
-    .adminbox {
-        width: 100%;
-        margin: 10px auto;
-    }
+    gap: 10px;
 
-    button {
-        width: 100%;
-        margin-top: 8px;
-    }
+    margin-bottom: 15px;
 }
 
-/* THEME TOGGLE */
-body {
+
+.categoryRow:last-child {
+    margin-bottom: 0;
+}
+
+
+.categoryRow span {
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   STAT BAR
+========================================================= */
+
+.statbar {
+    height: 12px;
+
+    background-color: #ddd;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.statbarFill {
+    height: 100%;
+
+    width: 0%;
+
+    background-color: #3498db;
+
+    border-radius: 10px;
+
+    transition: width 0.4s;
+}
+
+
+/* =========================================================
+   EVENT SEAT DETAILS
+========================================================= */
+
+.eventSeatDetails {
+    width: 100%;
+
+    margin-top: 15px;
+    margin-bottom: 30px;
+
+    overflow-x: auto;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    background-color: white;
+}
+
+
+/* =========================================================
+   EVENT SEAT TABLE
+========================================================= */
+
+#eventSeatTable {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background-color: white;
+}
+
+
+#eventSeatTable th,
+#eventSeatTable td {
+    padding: 12px 15px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+#eventSeatTable th {
+    background-color: #2c3e50;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+#eventSeatTable td {
+    font-size: 14px;
+}
+
+
+#eventSeatTable tbody tr:hover {
     background-color: #f4f6f8;
-    color: #222;
 }
+
+
+#eventSeatTable tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
 
 body.dark-theme {
     background-color: #1e1e1e;
-    color: white;
+
+    color: #f1f1f1;
 }
 
-body.dark-theme .Header,
+
+/* Main Boxes */
+
 body.dark-theme .label,
 body.dark-theme .information,
-body.dark-theme .adminbox {
+body.dark-theme .loginpopup,
+body.dark-theme .adminpage {
     background-color: #2c2c2c;
+
     color: white;
+
+    border-color: #444;
 }
 
-body.dark-theme input,
-body.dark-theme select {
-    background-color: #3a3a3a;
-    color: white;
-    border-color: #666;
+
+/* Header */
+
+body.dark-theme .siteHeader {
+    background-color: #202b35;
 }
+
+
+/* Text */
 
 body.dark-theme h1,
 body.dark-theme h2,
 body.dark-theme h3,
 body.dark-theme p,
-body.dark-theme label,
-body.dark-theme summary {
+body.dark-theme label {
     color: #f1f1f1;
 }
 
+
+/* Inputs */
+
+body.dark-theme input,
+body.dark-theme select {
+    background-color: #3a3a3a;
+
+    color: white;
+
+    border-color: #666;
+}
+
+
+body.dark-theme input::placeholder {
+    color: #bbb;
+}
+
+
+/* Buttons */
+
+body.dark-theme button {
+    background-color: #555;
+
+    color: white;
+}
+
+
+body.dark-theme button:hover {
+    background-color: #444;
+}
+
+
+body.dark-theme .adminButton button {
+    background-color: #202b35;
+}
+
+
+body.dark-theme .adminButton button:hover {
+    background-color: #151e26;
+}
+
+
+body.dark-theme button:disabled {
+    background-color: #555;
+
+    color: #aaa;
+}
+
+
+body.dark-theme .closebutton {
+    background-color: #e74c3c;
+}
+
+
+body.dark-theme .closebutton:hover {
+    background-color: #c0392b;
+}
+
+
+/* Event Area */
+
+body.dark-theme .information.details {
+    background-color: #333;
+
+    border-color: #555;
+}
+
+
 body.dark-theme .eventcard {
     background-color: #333;
+
     color: white;
+
     border-left-color: #3498db;
 }
 
 
+body.dark-theme .eventcard h3 {
+    color: white;
+}
 
-body.dark-theme .information details {
+
+/* Admin Form */
+
+body.dark-theme #eventForm {
     background-color: #333;
+
     border-color: #555;
 }
 
 
+body.dark-theme .adminpage hr {
+    border-top-color: #555;
+}
 
-body.dark-theme .adminlogin {
+
+/* Statistics */
+
+body.dark-theme .statcard,
+body.dark-theme .categoryStats {
     background-color: #333;
+
     border-color: #555;
+}
+
+
+body.dark-theme .statcard h3 {
+    color: #ddd;
+}
+
+
+body.dark-theme .statcard span {
+    color: #5dade2;
+}
+
+
+body.dark-theme .statbar {
+    background-color: #555;
+}
+
+
+/* Table */
+
+body.dark-theme .eventSeatDetails,
+body.dark-theme #eventSeatTable {
+    background-color: #333;
+
+    border-color: #555;
+
+    color: white;
+}
+
+
+body.dark-theme #eventSeatTable th {
+    background-color: #202b35;
+}
+
+
+body.dark-theme #eventSeatTable td {
+    border-bottom-color: #555;
+}
+
+
+body.dark-theme #eventSeatTable tbody tr:hover {
+    background-color: #3a3a3a;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media screen and (max-width: 800px) {
+
+    body {
+        padding: 20px;
+    }
+
+
+    .siteHeader,
+    .label,
+    .information,
+    .adminpage {
+        width: 95%;
+    }
+
+
+    #eventList {
+        gap: 15px;
+    }
+
+
+    #statistics {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    /* Top Buttons */
+
+    #themeForm {
+        width: 100%;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+    }
+
+
+    #themeForm button {
+        width: auto;
+
+        padding: 10px 12px;
+
+        font-size: 12px;
+    }
+
+
+    /* Header */
+
+    .siteHeader {
+        width: 100%;
+
+        margin: 10px auto 20px auto;
+
+        border-radius: 12px;
+    }
+
+
+    .headerContent {
+        grid-template-columns: 1fr;
+    }
+
+
+    .headerText {
+        padding: 30px 20px;
+    }
+
+
+    .headerText h1 {
+        font-size: 28px;
+    }
+
+
+    .headerDescription {
+        font-size: 14px;
+    }
+
+
+    .headerImage {
+        height: 200px;
+
+        min-height: 200px;
+    }
+
+
+    /* Admin Header */
+
+    .adminHeader .headerContent {
+        grid-template-columns: 1fr;
+    }
+
+
+    .adminHeader .headerText {
+        padding: 25px 20px 10px 20px;
+    }
+
+
+    .adminHeader .headerText h1 {
+        font-size: 26px;
+    }
+
+
+    .headerAction {
+        padding: 0 20px 25px 20px;
+    }
+
+
+    .headerAction button {
+        width: 100%;
+    }
+
+
+    /* Main Boxes */
+
+    .label,
+    .information,
+    .adminpage {
+        width: 100%;
+
+        margin: 10px auto;
+
+        padding: 20px;
+    }
+
+
+    /* Search buttons */
+
+    .label button {
+        width: 100%;
+
+        margin-top: 8px;
+        margin-right: 0;
+    }
+
+
+    /* Event List */
+
+    #eventList {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .eventcard {
+        padding: 15px;
+    }
+
+
+    .eventcard button {
+        width: 100%;
+    }
+
+
+    .information.details {
+        padding: 10px;
+    }
+
+
+    /* Login Popup */
+
+    .loginpopup {
+        width: 100%;
+
+        padding: 25px 20px;
+    }
+
+
+    /* Admin Page */
+
+    .adminpage {
+        padding: 20px;
+    }
+
+
+    #eventForm {
+        padding: 15px;
+    }
+
+
+    #eventForm button {
+        width: 100%;
+    }
+
+
+    /* Statistic */
+
+    #statistics {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .statcard {
+        padding: 15px 10px;
+    }
+
+
+    .statcard span {
+        font-size: 24px;
+    }
+
+
+    /* Category */
+
+    .categoryStats {
+        padding: 15px;
+    }
+
+
+    .categoryRow {
+        grid-template-columns: 70px 1fr 30px;
+
+        gap: 8px;
+    }
+
+
+    /* Seat Table */
+
+    #eventSeatTable {
+        min-width: 650px;
+    }
+
+
+    #eventSeatTable th,
+    #eventSeatTable td {
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media screen and (max-width: 400px) {
+
+    #themeForm {
+        justify-content: center;
+    }
+
+
+    #statistics {
+        grid-template-columns: 1fr;
+    }
+
+
+    .headerText h1 {
+        font-size: 24px;
+    }
+
+
+    .categoryRow {
+        grid-template-columns: 65px 1fr 25px;
+    }
+
 }

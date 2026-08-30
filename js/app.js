@@ -47,10 +47,17 @@ const initialEvents = [
 ];
 
 
+// Load Events from localStorage
 let events = JSON.parse(localStorage.getItem("events"));
 
 if (events === null) {
+
     events = initialEvents;
+
+    localStorage.setItem(
+        "events",
+        JSON.stringify(events)
+    );
 }
 
 
@@ -64,17 +71,9 @@ form.addEventListener("submit", function(event) {
     // Stop page from refreshing
     event.preventDefault();
 
-    const titleInput = document.getElementById("title");
-
     const searchInput = document.getElementById("search");
     const categorySelect = document.getElementById("category");
-        categorySelect.addEventListener("change", function() {
-            searchFilterSort();
-        });
     const dateInput = document.getElementById("date");
-        dateInput.addEventListener("change", function() {
-            searchFilterSort();
-        });
 
     // Clean search text
     const searchValue = searchInput.value.trim().toLowerCase();
@@ -94,38 +93,32 @@ form.addEventListener("submit", function(event) {
 
     console.log("Search data saved:", eventsSearch);
 
-        const filteredEvents = events.filter(function(item) {
-
-        const matchSearch =
-            item.title.toLowerCase().includes(searchValue);
-
-        const matchCategory =
-            selectedCategory === "all" ||
-            item.category === selectedCategory;
-
-        const matchDate =
-            selectedDate === "" ||
-            item.date === selectedDate;
-
-        return matchSearch && matchCategory && matchDate;
-    });
-
-    console.log("Search result:", filteredEvents);
-
-    showEvents(filteredEvents);
+    // Search + Filter + Sort
+    searchFilterSort();
 
 });
 
+
+
 form.addEventListener("reset", function(event) {
+
     const searchInput = document.getElementById("search");
     const categorySelect = document.getElementById("category");
     const dateInput = document.getElementById("date");
+    const sortSelect = document.getElementById("sort");
+
     searchInput.value = "";
     categorySelect.value = "all";
     dateInput.value = "";
+    sortSelect.value = "none";
 
     localStorage.removeItem("eventsSearch");
+
+    // Show all events again
+    showEvents(events);
 });
+
+
 
 //Event List Rendering
 function showEvents(eventData) {
@@ -174,19 +167,46 @@ function showEvents(eventData) {
                 </button>
 
             </div>
-
-            <br>
         `;
     });
 }
 
 
+
 //themeing
 const themeToggle = document.getElementById("themeToggle");
 
+
+// Load saved theme
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+
+    document.body.classList.add("dark-theme");
+
+}
+
+
+// Change theme
 themeToggle.addEventListener("click", function() {
+
     document.body.classList.toggle("dark-theme");
+
+
+    // Save theme
+    if (document.body.classList.contains("dark-theme")) {
+
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        localStorage.setItem("theme", "light");
+
+    }
+
 });
+
+
 
 //fillter show
 function searchFilterSort() {
@@ -225,19 +245,25 @@ function searchFilterSort() {
     });
 
 
-    // SORT
+    // SORT DATE
     if (sortValue === "date") {
 
         filteredEvents.sort(function(a, b) {
+
             return new Date(a.date) - new Date(b.date);
+
         });
 
     }
 
+
+    // SORT SEATS
     if (sortValue === "seats") {
 
         filteredEvents.sort(function(a, b) {
+
             return b.seats - a.seats;
+
         });
 
     }
@@ -246,49 +272,63 @@ function searchFilterSort() {
     showEvents(filteredEvents);
 }
 
-// Add Event Form Handling
-
-const eventForm = document.getElementById("eventForm");
 
 
-eventForm.addEventListener("submit", function(event) {
+// Real-time Search
+const searchInput = document.getElementById("search");
 
-    event.preventDefault();
-    const titleInput = document.getElementById("title");
-    const categoryInput = document.getElementById("category");
-    const speakerInput = document.getElementById("speaker");
-    const dateInput = document.getElementById("date");
-    const seatsInput = document.getElementById("seats");
-    const descriptionInput = document.getElementById("description");
+searchInput.addEventListener("input", function() {
 
-    const newEvent = {
-        id: initialEvents.length + 1,
-        title: titleInput.value.trim(),
-        category: categoryInput.value,
-        speaker: speakerInput.value.trim(),
-        date: dateInput.value,
-        seats: parseInt(seatsInput.value),
-        description: descriptionInput.value.trim(),
-        isRegistered: false
-    };
+    searchFilterSort();
 
-    events.push(newEvent);
-
-    localStorage.setItem(
-        "events",
-        JSON.stringify(events)
-    );
-
-    console.log("New event added:", newEvent);
-    console.log("All events:", events);
-
-    eventForm.reset();
 });
 
+
+
+// Category Filter
+const categorySelect = document.getElementById("category");
+
+categorySelect.addEventListener("change", function() {
+
+    searchFilterSort();
+
+});
+
+
+
+// Date Filter
+const dateInput = document.getElementById("date");
+
+dateInput.addEventListener("change", function() {
+
+    searchFilterSort();
+
+});
+
+
+
+// Sort
+const sortSelect = document.getElementById("sort");
+
+sortSelect.addEventListener("change", function() {
+
+    searchFilterSort();
+
+});
+
+
+
+
+
+
+
+// Register Event
 function registerEvent(id) {
 
     const eventItem = events.find(function(item) {
+
         return item.id === id;
+
     });
 
 
@@ -310,6 +350,7 @@ function registerEvent(id) {
     // decrease seat
     eventItem.seats = eventItem.seats - 1;
 
+
     // registered
     eventItem.isRegistered = true;
 
@@ -323,4 +364,48 @@ function registerEvent(id) {
 
     // show again
     searchFilterSort();
+
 }
+
+
+// Admin Login Popup
+
+const openAdmin = document.getElementById("openAdmin");
+const closeAdmin = document.getElementById("closeAdmin");
+const adminModal = document.getElementById("adminModal");
+const adminLoginButton = document.getElementById("adminLoginButton");
+
+openAdmin.addEventListener("click", function() {
+
+    adminModal.classList.add("show");
+
+});
+
+
+closeAdmin.addEventListener("click", function() {
+
+    adminModal.classList.remove("show");
+
+});
+
+
+// No real login yet
+adminLoginButton.addEventListener("click", function() {
+
+    window.location.href = "admin.html";
+
+});
+
+// Click blank background = close popup
+adminModal.addEventListener("click", function() {
+
+    adminModal.classList.remove("show");
+
+});
+
+
+
+
+// Show Events when website first loads
+showEvents(events);
+adminModal.classList.remove("show");
