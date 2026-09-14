@@ -22,20 +22,52 @@ async function getWeather(city){
     }
 }
 
-function displayWeather(data){
-    console.log(data);
-    const tmp = data.main.temp;
+function displayWeather(data) {
+
+    const temp = data.main.temp;
     const humidity = data.main.humidity;
     const windSpeed = data.wind.speed;
     const description = data.weather[0].description;
+    const icon = data.weather[0].icon;
 
     const weatherHTML = `
-        <h3>Weather in ${data.name}</h3>
-        <p><strong>Temperature:</strong> ${tmp} °C</p>
-        <p><strong>Humidity:</strong> ${humidity}%</p>
-        <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
-        <p><strong>Description:</strong> ${description}</p>
+        <div class="weather-header">
+
+            <div>
+                <h3>${data.name}</h3>
+                <p class="weather-description">${description}</p>
+            </div>
+
+            <img 
+                class="weather-icon"
+                src="https://openweathermap.org/img/wn/${icon}@2x.png"
+                alt="${description}"
+            >
+
+        </div>
+
+        <div class="temperature">
+            ${Math.round(temp)}°
+            <span>C</span>
+        </div>
+
+        <div class="weather-details">
+
+            <div class="weather-detail">
+                <div class="detail-icon">💧</div>
+                <span>Humidity</span>
+                <strong>${humidity}%</strong>
+            </div>
+
+            <div class="weather-detail">
+                <div class="detail-icon">💨</div>
+                <span>Wind</span>
+                <strong>${windSpeed} m/s</strong>
+            </div>
+
+        </div>
     `;
+
     document.getElementById('weatherResult').innerHTML = weatherHTML;
 }
 
@@ -137,25 +169,111 @@ function displayMultiWeather(weatherData) {
     result.innerHTML = weatherHTML;
 }
 
+let selectedCities = [];
+
+function addCity() {
+
+    const cityInput = document.getElementById('cities');
+    const city = cityInput.value.trim();
+
+    if (!city) {
+        return;
+    }
+
+    if (!selectedCities.includes(city)) {
+        selectedCities.push(city);
+    }
+
+    displayCityList();
+
+    cityInput.value = '';
+}
+
+function displayCityList() {
+
+    const cityList = document.getElementById('cityList');
+
+    const html = selectedCities.map(function(city) {
+
+        return `
+            <span class="badge badge-info mr-2">
+                ${city}
+            </span>
+        `;
+
+    }).join('');
+
+    cityList.innerHTML = html;
+}
+
+document.getElementById('addCity').addEventListener('click', function() {
+    addCity();
+});
+
 document.getElementById('getMultiWeather').addEventListener('click', function() {
 
-    const input = document.getElementById('cities').value.trim();
-
-    if (!input) {
+    if (selectedCities.length === 0) {
 
         document.getElementById('multiWeatherResult').innerHTML = `
             <p class="text-danger">
-                Please enter city names.
+                Please add at least one city.
             </p>
         `;
 
         return;
     }
 
-    const cities = input
-        .split(',')
-        .map(city => city.trim())
-        .filter(city => city !== '');
-
-    getMultiWeather(cities);
+    getMultiWeather(selectedCities);
 });
+
+function displayMultiWeather(weatherData) {
+
+    const result = document.getElementById('multiWeatherResult');
+
+    const weatherHTML = weatherData.map(function(data) {
+
+        const icon = data.weather[0].icon;
+
+        return `
+            <div class="weather-item">
+
+                <div class="mini-weather-header">
+
+                    <div>
+                        <h3>${data.name}</h3>
+
+                        <p class="weather-description">
+                            ${data.weather[0].description}
+                        </p>
+                    </div>
+
+                    <img
+                        src="https://openweathermap.org/img/wn/${icon}@2x.png"
+                        class="mini-weather-icon"
+                    >
+
+                </div>
+
+                <div class="mini-temperature">
+                    ${Math.round(data.main.temp)}°
+                </div>
+
+                <div class="mini-details">
+
+                    <span>
+                        💧 ${data.main.humidity}%
+                    </span>
+
+                    <span>
+                        💨 ${data.wind.speed} m/s
+                    </span>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join('');
+
+    result.innerHTML = weatherHTML;
+}

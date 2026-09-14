@@ -5,7 +5,11 @@ body {
     padding: 20px;
 }
 
-/* Main container */
+
+/* =========================
+   Main Search Container
+========================= */
+
 .container {
     max-width: 800px;
     margin: 40px auto 0;
@@ -15,80 +19,485 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Make Bootstrap column use full width */
+
+/* Bootstrap column full width */
+
 .col-md-6 {
     max-width: 100%;
     flex: 0 0 100%;
 }
 
-/* Heading */
+
+/* =========================
+   Heading
+========================= */
+
 h2 {
     margin-bottom: 10px;
     color: #333333;
 }
 
-/* Search section */
+p {
+    color: #666666;
+}
+
+
+/* =========================
+   Search Form
+========================= */
+
 .form-group {
     display: flex;
     gap: 10px;
     margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 15px;
 }
 
-/* Search input */
-#city {
+
+/* Input */
+
+#city,
+#cities {
     flex: 1;
     height: 45px;
 }
 
-/* Search button */
+
+/* Single Search Button */
+
 #getWeather {
     height: 45px;
     padding: 0 20px;
     margin: 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
-/* Weather result card */
+
+/* Add City Button */
+
+#addCity {
+    height: 45px;
+    padding: 0 25px;
+    margin: 0;
+}
+
+
+/* =========================
+   Single Weather Result
+========================= */
+
 .weather-card {
     max-width: 800px;
     margin: 20px auto;
+
     background-color: #ffffff;
+
     border-radius: 8px;
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     padding: 20px;
+
     text-align: center;
+
     color: #333333;
 }
 
-/* Weather information */
-.weather-card h2 {
+
+.weather-card h3 {
     margin-bottom: 20px;
 }
+
 
 .weather-card p {
     font-size: 18px;
     margin: 10px 0;
 }
 
-/* Mobile */
+
+/* =========================
+   Multiple Weather Card
+========================= */
+
+.multi-weather-card {
+    max-width: 800px;
+    margin: 20px auto;
+
+    background-color: #ffffff;
+
+    border-radius: 8px;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    padding: 20px;
+
+    color: #333333;
+}
+
+
+/* =========================
+   Selected City List
+========================= */
+
+#cityList {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    min-height: 35px;
+
+    margin-top: 10px;
+}
+
+
+/* Bootstrap badge custom */
+
+#cityList .badge {
+    font-size: 15px;
+
+    padding: 8px 12px;
+
+    border-radius: 15px;
+}
+
+
+/* =========================
+   Search All Button
+========================= */
+
+#getMultiWeather {
+    margin-top: 5px;
+    margin-bottom: 20px;
+
+    padding: 10px 25px;
+}
+
+
+/* =========================
+   Multiple Weather Results
+========================= */
+
+#multiWeatherResult {
+    margin-top: 20px;
+}
+
+
+/* Each City Weather */
+
+.weather-item {
+    background-color: #f8f9fa;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    padding: 20px;
+
+    margin-bottom: 15px;
+}
+
+
+.weather-item h3 {
+    margin-bottom: 15px;
+
+    color: #333333;
+}
+
+
+.weather-item p {
+    margin: 6px 0;
+
+    font-size: 16px;
+}
+
+
+.weather-item hr {
+    display: none;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+.footer {
+    margin-top: 20px;
+
+    border-radius: 8px;
+}
+
+
+/* =========================
+   Mobile Responsive
+========================= */
+
 @media (max-width: 576px) {
+
     body {
         padding: 10px;
     }
 
-    .container {
+    .container,
+    .weather-card,
+    .multi-weather-card {
         margin-top: 20px;
+
         padding: 20px;
     }
+
 
     .form-group {
         flex-direction: column;
     }
 
-    #getWeather {
+
+    #getWeather,
+    #addCity {
         width: 100%;
     }
+
+
+    #getMultiWeather {
+        width: 100%;
+    }
+
+
+    .weather-item {
+        text-align: center;
+    }
+}
+
+/* ===== Make page softer ===== */
+
+body {
+    background: linear-gradient(135deg, #eef5ff, #f8f9fa);
+}
+
+
+/* ===== Card effect ===== */
+
+.container,
+.weather-card,
+.multi-weather-card {
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.weather-card:hover,
+.multi-weather-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ===== Heading ===== */
+
+h2 {
+    font-weight: 600;
+    color: #212529;
+}
+
+
+/* ===== Input ===== */
+
+.form-control {
+    border-radius: 8px;
+    padding-left: 15px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+
+/* ===== Buttons ===== */
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ===== Selected Cities ===== */
+
+#cityList .badge {
+    font-size: 14px;
+    padding: 9px 14px;
+    border-radius: 20px;
+}
+
+
+/* ===== Multiple Weather Results ===== */
+
+#multiWeatherResult {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+
+/* Individual city */
+
+.weather-item {
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    margin: 0;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+.weather-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.weather-item h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+
+.weather-item p {
+    margin: 8px 0;
+}
+
+
+/* ===== Single Result ===== */
+
+#weatherResult h3 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+
+/* ===== Search All ===== */
+
+#getMultiWeather {
+    min-width: 120px;
+}
+
+
+/* ===== Footer ===== */
+
+.footer {
+    background: transparent !important;
+}
+
+.footer .text-muted {
+    font-size: 14px;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-header h3 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.weather-description {
+    text-transform: capitalize;
+    color: #777;
+    margin-top: 5px;
+}
+
+.weather-icon {
+    width: 90px;
+    height: 90px;
+}
+
+.temperature {
+    font-size: 64px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.temperature span {
+    font-size: 24px;
+    color: #777;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.weather-detail {
+    background-color: #f5f7fa;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-icon {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.weather-detail span {
+    font-size: 14px;
+    color: #777;
+}
+
+.weather-detail strong {
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+.mini-weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mini-weather-header h3 {
+    margin: 0;
+}
+
+.mini-weather-icon {
+    width: 65px;
+    height: 65px;
+}
+
+.mini-temperature {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 10px 0 15px;
+}
+
+.mini-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: #555;
 }

@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Single City Result -->
     <div class="weather-card">
         <div class="card-body" id="weatherResult">
@@ -35,9 +35,16 @@
              <h2>Multiple Weather Information</h2>
              <p>Get the current weather information for multiple cities.</p>
              <div class="form-group">
-                 <input type="text" id="cities" class="form-control" placeholder="Enter city names separated by commas">
-                 <button id="getMultiWeather" class="btn btn-primary">Search</button>
+                 <input type="text" id="cities" class="form-control" placeholder="Enter city name">
+                 <button id="addCity" class="btn btn-primary">Add</button>
             </div>
+
+            <div id="cityList" class="mb-3">
+                <!-- List of added cities will be displayed here -->    
+            </div>
+
+            <button id="getMultiWeather" class="btn btn-success">Search All</button>
+            
             <div id="multiWeatherResult">
                 <!-- Multiple weather information will be displayed here -->
             </div>
