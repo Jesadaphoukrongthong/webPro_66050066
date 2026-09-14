@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherDashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Weather Information</h2>
+                <p>Get the current weather information for any city.</p>
+                <div class="form-group">
+                    <input type="text" id="city" class="form-control" placeholder="Enter city name">
+                    <button id="getWeather" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="weather-card">
+        <div class="card-body" id="weatherResult">
+            <!-- Weather information will be displayed here -->
+             <script src="app.js"></script>
+        </div>
+    </div>
+
+    <div class="multi-weather-card">
+        <div class="card-body" id="weatherResult">
+            <!-- Weathers information will be displayed here -->
+             <h2>Multiple Weather Information</h2>
+             <p>Get the current weather information for multiple cities.</p>
+             <div class="form-group">
+                 <input type="text" id="cities" class="form-control" placeholder="Enter city names separated by commas">
+                 <button id="getMultiWeather" class="btn btn-primary">Search</button>
+            </div>
+            <div id="multiWeatherResult">
+                <!-- Multiple weather information will be displayed here -->
+                 <script src="app.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <footer class="footer mt-auto py-3 bg-light">
+                    <div class="container text-center">
+                        <span class="text-muted">© 2024 WeatherDashboard. All rights reserved.</span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

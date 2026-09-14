@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Main container */
+.container {
+    max-width: 800px;
+    margin: 40px auto 0;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make Bootstrap column use full width */
+.col-md-6 {
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+
+/* Heading */
+h2 {
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+/* Search section */
+.form-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+/* Search input */
+#city {
+    flex: 1;
+    height: 45px;
+}
+
+/* Search button */
+#getWeather {
+    height: 45px;
+    padding: 0 20px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Weather result card */
+.weather-card {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    color: #333333;
+}
+
+/* Weather information */
+.weather-card h2 {
+    margin-bottom: 20px;
+}
+
+.weather-card p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    #getWeather {
+        width: 100%;
+    }
+}
