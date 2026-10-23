@@ -1,11 +1,20 @@
-# MiniShop React - Week 10
+# MiniShop React — Week 11
 
-Week 10 extends the Week 9 routing project with a mock REST API and a CRUD product-management page.
+Week 11 upgrades the Week 10 MiniShop admin UI while keeping the existing CRUD REST API behavior.
 
-## Requirements
+## Features
 
-- Node.js 20+
-- npm
+- React + Vite + Tailwind CSS v4
+- DaisyUI component classes
+- Shared Admin Layout with Navbar and Sidebar
+- Dashboard summary cards from the REST API
+- Product management table
+- Add/Edit product modal
+- Delete confirmation
+- Validation, Loading, Error, and Empty states
+- Light/Dark mode stored in localStorage
+- Responsive layout for mobile, tablet, and desktop
+- JSON Server mock REST API
 
 ## Install
 
@@ -15,9 +24,7 @@ npm install
 
 ## Run
 
-Use two terminals.
-
-Terminal 1 - JSON Server:
+Terminal 1:
 
 ```bash
 npm run api
@@ -25,30 +32,23 @@ npm run api
 
 API: http://localhost:3001/products
 
-Terminal 2 - Vite:
+Terminal 2:
 
 ```bash
 npm run dev
 ```
 
-App: http://localhost:5173
+Open:
 
-Product Management: http://localhost:5173/admin/products
+- http://localhost:5173/admin/dashboard
+- http://localhost:5173/admin/products
 
-## CRUD API
+## Week 11 checks
 
-- `GET /products` - read all products
-- `POST /products` - create a product
-- `PUT /products/:id` - replace/update a product
-- `DELETE /products/:id` - delete a product
-
-The data is stored in `db.json`. JSON Server is only a mock API for frontend practice.
-
-## Week 10 test
-
-1. Open `/admin/products`.
-2. Add `Mouse`, price `450`.
-3. Open http://localhost:3001/products and confirm the record exists.
-4. Edit Mouse to `490`.
-5. Delete Mouse.
-6. Try an empty name or price `0` to verify validation.
+1. Dashboard shows Total Products, Product Value, and Categories from the API.
+2. Add a product through the modal.
+3. Edit a product through the same modal.
+4. Delete a product and confirm deletion.
+5. Try an empty name or price 0 to verify validation.
+6. Toggle dark mode and refresh to verify persistence.
+7. Test responsive sizes such as 375, 768, and 1440 px.

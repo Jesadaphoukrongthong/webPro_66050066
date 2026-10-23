@@ -1,6 +1,8 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import AdminLayout from './components/AdminLayout.jsx'
 import Layout from './components/Layout.jsx'
 import About from './pages/About.jsx'
+import Dashboard from './pages/Dashboard.jsx'
 import Home from './pages/Home.jsx'
 import NotFound from './pages/NotFound.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
@@ -17,9 +19,15 @@ function App() {
         <Route path="products" element={<Products />} />
         <Route path="products/:id" element={<ProductDetail />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="admin/products" element={<ProductManagement />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
+
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="products" element={<ProductManagement />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

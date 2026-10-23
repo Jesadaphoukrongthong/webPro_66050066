@@ -9,14 +9,16 @@ import {
 const emptyForm = {
   name: '',
   price: '',
-  category: '',
+  category: 'Computer',
   icon: '📦',
+  description: '',
 }
 
-function ProductManagement() {
+export default function ProductManagement() {
   const [products, setProducts] = useState([])
   const [form, setForm] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
@@ -46,9 +48,7 @@ function ProductManagement() {
   }
 
   function validateForm() {
-    if (!form.name.trim()) {
-      return 'Product name is required.'
-    }
+    if (!form.name.trim()) return 'Product name is required.'
 
     const price = Number(form.price)
     if (!Number.isFinite(price) || price <= 0) {
@@ -58,9 +58,30 @@ function ProductManagement() {
     return ''
   }
 
-  function resetForm() {
-    setForm(emptyForm)
+  function openAddModal() {
     setEditingId(null)
+    setForm(emptyForm)
+    setValidationError('')
+    setIsModalOpen(true)
+  }
+
+  function startEdit(product) {
+    setEditingId(product.id)
+    setForm({
+      name: product.name || '',
+      price: String(product.price ?? ''),
+      category: product.category || 'Computer',
+      icon: product.icon || '📦',
+      description: product.description || '',
+    })
+    setValidationError('')
+    setIsModalOpen(true)
+  }
+
+  function closeModal() {
+    setIsModalOpen(false)
+    setEditingId(null)
+    setForm(emptyForm)
     setValidationError('')
   }
 
@@ -76,8 +97,9 @@ function ProductManagement() {
     const productData = {
       name: form.name.trim(),
       price: Number(form.price),
-      category: form.category.trim() || 'General',
+      category: form.category || 'Computer',
       icon: form.icon.trim() || '📦',
+      description: form.description.trim(),
     }
 
     try {
@@ -91,7 +113,7 @@ function ProductManagement() {
         await createProduct(productData)
       }
 
-      resetForm()
+      closeModal()
       await loadProducts()
     } catch (err) {
       console.error(err)
@@ -101,18 +123,6 @@ function ProductManagement() {
     }
   }
 
-  function handleEdit(product) {
-    setEditingId(product.id)
-    setForm({
-      name: product.name ?? '',
-      price: product.price ?? '',
-      category: product.category ?? '',
-      icon: product.icon ?? '📦',
-    })
-    setValidationError('')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   async function handleDelete(product) {
     const confirmed = window.confirm(`Delete ${product.name}?`)
     if (!confirmed) return
@@ -120,11 +130,6 @@ function ProductManagement() {
     try {
       setError('')
       await deleteProduct(product.id)
-
-      if (editingId === product.id) {
-        resetForm()
-      }
-
       await loadProducts()
     } catch (err) {
       console.error(err)
@@ -133,181 +138,203 @@ function ProductManagement() {
   }
 
   return (
-    <div className="space-y-8">
-      <section>
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">Week 10</p>
-        <h1 className="mt-2 text-4xl font-black tracking-tight">Product Management</h1>
-        <p className="mt-3 max-w-3xl text-slate-600">
-          Manage MiniShop products through a mock REST API using GET, POST, PUT, and DELETE.
-        </p>
-      </section>
+    <section className="space-y-6">
+      <div className="breadcrumbs text-sm">
+        <ul>
+          <li>Admin</li>
+          <li>Products</li>
+        </ul>
+      </div>
 
-      <section className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 className="text-2xl font-bold">{editingId !== null ? 'Edit Product' : 'Add Product'}</h2>
-            <p className="mt-1 text-sm text-slate-500">
-              {editingId !== null ? `Editing product ID ${editingId}` : 'Create a new product in db.json through the API.'}
-            </p>
-          </div>
-          {editingId !== null && (
-            <button
-              type="button"
-              onClick={resetForm}
-              className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              Cancel Edit
-            </button>
-          )}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-bold">Product Management</h1>
+          <p className="mt-2 opacity-70">Manage MiniShop products through the Week 10 REST API.</p>
         </div>
-
-        <form onSubmit={handleSubmit} className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Product Name *</span>
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Mouse"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Price (THB) *</span>
-            <input
-              name="price"
-              type="number"
-              min="0"
-              step="0.01"
-              value={form.price}
-              onChange={handleChange}
-              placeholder="450"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Category</span>
-            <input
-              name="category"
-              value={form.category}
-              onChange={handleChange}
-              placeholder="Accessory"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-sm font-semibold text-slate-700">Icon</span>
-            <input
-              name="icon"
-              value={form.icon}
-              onChange={handleChange}
-              placeholder="🖱️"
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            />
-          </label>
-
-          <div className="md:col-span-2 lg:col-span-4">
-            {validationError && (
-              <p className="mb-3 rounded-lg bg-amber-50 px-4 py-3 text-sm font-medium text-amber-800 ring-1 ring-amber-200">
-                {validationError}
-              </p>
-            )}
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {saving ? 'Saving...' : editingId !== null ? 'Save Changes' : 'Add Product'}
-            </button>
-          </div>
-        </form>
-      </section>
+        <button type="button" className="btn btn-primary" onClick={openAddModal}>
+          + Add Product
+        </button>
+      </div>
 
       {error && (
-        <div className="rounded-xl bg-red-50 px-5 py-4 text-red-700 ring-1 ring-red-200">
-          <strong>Error:</strong> {error}
+        <div role="alert" className="alert alert-error">
+          <span>{error}</span>
+          <button className="btn btn-sm" onClick={loadProducts}>
+            Retry
+          </button>
         </div>
       )}
 
-      <section className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-6 py-5">
-          <div>
-            <h2 className="text-2xl font-bold">Products from REST API</h2>
-            <p className="mt-1 text-sm text-slate-500">Endpoint: http://localhost:3001/products</p>
-          </div>
-          <button
-            type="button"
-            onClick={loadProducts}
-            disabled={loading}
-            className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50"
-          >
-            Refresh
-          </button>
-        </div>
-
+      <div className="overflow-x-auto rounded-box bg-base-100 shadow">
         {loading ? (
-          <div className="p-10 text-center text-slate-500">Loading products...</div>
+          <div className="flex justify-center p-10">
+            <span className="loading loading-spinner loading-lg" />
+          </div>
         ) : products.length === 0 ? (
           <div className="p-10 text-center">
             <p className="text-lg font-semibold">No products found</p>
-            <p className="mt-1 text-sm text-slate-500">Add a product using the form above.</p>
+            <p className="mt-1 opacity-60">Add your first product with the button above.</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200 text-left">
-              <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
-                <tr>
-                  <th className="px-6 py-3">ID</th>
-                  <th className="px-6 py-3">Product</th>
-                  <th className="px-6 py-3">Category</th>
-                  <th className="px-6 py-3">Price</th>
-                  <th className="px-6 py-3 text-right">Actions</th>
+          <table className="table table-zebra">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">{product.icon || '📦'}</span>
+                      <div>
+                        <div className="font-semibold">{product.name}</div>
+                        <div className="text-xs opacity-50">ID: {product.id}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span className="badge badge-outline">
+                      {product.category || 'General'}
+                    </span>
+                  </td>
+                  <td>฿{Number(product.price).toLocaleString('en-US')}</td>
+                  <td>
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => startEdit(product)}
+                        className="btn btn-info btn-sm"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(product)}
+                        className="btn btn-error btn-sm"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {products.map((product) => (
-                  <tr key={product.id} className="hover:bg-slate-50">
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-500">{product.id}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl" aria-hidden="true">{product.icon || '📦'}</span>
-                        <span className="font-semibold text-slate-900">{product.name}</span>
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-600">{product.category || 'General'}</td>
-                    <td className="whitespace-nowrap px-6 py-4 font-semibold text-blue-700">
-                      ฿{Number(product.price).toLocaleString()}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-right">
-                      <div className="flex justify-end gap-2">
-                        <button
-                          type="button"
-                          onClick={() => handleEdit(product)}
-                          className="rounded-lg bg-amber-100 px-3 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-200"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(product)}
-                          className="rounded-lg bg-red-100 px-3 py-2 text-sm font-semibold text-red-700 hover:bg-red-200"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         )}
-      </section>
-    </div>
+      </div>
+
+      {isModalOpen && (
+        <div className="modal modal-open" role="dialog" aria-modal="true">
+          <div className="modal-box max-h-[90vh] max-w-2xl overflow-y-auto">
+            <h2 className="text-2xl font-bold">
+              {editingId !== null ? 'Edit Product' : 'Add Product'}
+            </h2>
+            <p className="mt-1 text-sm opacity-60">
+              {editingId !== null
+                ? `Editing product ID ${editingId}`
+                : 'Create a new product through the mock REST API.'}
+            </p>
+
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              <label className="form-control w-full">
+                <span className="label-text mb-2 font-semibold">Product name</span>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Product name"
+                  className="input input-bordered w-full"
+                  required
+                />
+              </label>
+
+              <label className="form-control w-full">
+                <span className="label-text mb-2 font-semibold">Price</span>
+                <input
+                  name="price"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  value={form.price}
+                  onChange={handleChange}
+                  placeholder="Price"
+                  className="input input-bordered w-full"
+                  required
+                />
+              </label>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="form-control w-full">
+                  <span className="label-text mb-2 font-semibold">Category</span>
+                  <select
+                    name="category"
+                    value={form.category}
+                    onChange={handleChange}
+                    className="select select-bordered w-full"
+                  >
+                    <option>Computer</option>
+                    <option>Audio</option>
+                    <option>Fashion</option>
+                    <option>Gadget</option>
+                  </select>
+                </label>
+
+                <label className="form-control w-full">
+                  <span className="label-text mb-2 font-semibold">Icon</span>
+                  <input
+                    name="icon"
+                    value={form.icon}
+                    onChange={handleChange}
+                    placeholder="📦"
+                    className="input input-bordered w-full"
+                  />
+                </label>
+              </div>
+
+              <label className="form-control w-full">
+                <span className="label-text mb-2 font-semibold">Description</span>
+                <textarea
+                  name="description"
+                  value={form.description}
+                  onChange={handleChange}
+                  placeholder="Product description"
+                  className="textarea textarea-bordered min-h-24 w-full"
+                />
+              </label>
+
+              {validationError && (
+                <div role="alert" className="alert alert-warning">
+                  <span>{validationError}</span>
+                </div>
+              )}
+
+              <div className="modal-action">
+                <button type="button" className="btn" onClick={closeModal} disabled={saving}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary" disabled={saving}>
+                  {saving
+                    ? 'Saving...'
+                    : editingId !== null
+                      ? 'Save Changes'
+                      : 'Add Product'}
+                </button>
+              </div>
+            </form>
+          </div>
+          <button
+            type="button"
+            className="modal-backdrop"
+            aria-label="Close modal"
+            onClick={closeModal}
+          />
+        </div>
+      )}
+    </section>
   )
 }
-
-export default ProductManagement

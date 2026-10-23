@@ -5,28 +5,32 @@
       "name": "Laptop",
       "price": 12900,
       "category": "Computer",
-      "icon": "💻"
+      "icon": "💻",
+      "description": "Portable computer for work and study."
     },
     {
       "id": 2,
       "name": "Headphones",
       "price": 1290,
       "category": "Audio",
-      "icon": "🎧"
+      "icon": "🎧",
+      "description": "Wireless headphones for music and calls."
     },
     {
       "id": 3,
       "name": "Backpack",
       "price": 890,
       "category": "Fashion",
-      "icon": "🎒"
+      "icon": "🎒",
+      "description": "Everyday backpack for school or travel."
     },
     {
       "id": 4,
       "name": "Smart Watch",
       "price": 2990,
       "category": "Gadget",
-      "icon": "⌚"
+      "icon": "⌚",
+      "description": "Smart wearable for notifications and activity tracking."
     }
   ]
 }
