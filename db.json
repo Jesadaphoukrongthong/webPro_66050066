@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "price": 12900,
+      "category": "Computer",
+      "icon": "💻"
+    },
+    {
+      "id": 2,
+      "name": "Headphones",
+      "price": 1290,
+      "category": "Audio",
+      "icon": "🎧"
+    },
+    {
+      "id": 3,
+      "name": "Backpack",
+      "price": 890,
+      "category": "Fashion",
+      "icon": "🎒"
+    },
+    {
+      "id": 4,
+      "name": "Smart Watch",
+      "price": 2990,
+      "category": "Gadget",
+      "icon": "⌚"
+    }
+  ]
+}
